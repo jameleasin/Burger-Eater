@@ -3,4 +3,4 @@
 USE burgers_db;
 -- Insert new rows of data.
 INSERT INTO burgers (burger_name, devoured)
-VALUES ("hamburger", false), ("cheeseburger", false), ("tofu burger", false);
+VALUES ("Beet & Goat Burger", false), ("Mac & Cheeseburger", false), ("I can't Beleive it's Not Meat Burger", false);
