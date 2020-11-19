@@ -1,0 +1,33 @@
+{
+  "name": "burger-eater",
+  "version": "1.0.0",
+  "description": "Burger-eater",
+  "main": "server.js",
+  "dependencies": {
+    "node" : "v14.15.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "heroku": "^7.47.3",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jameleasin/Burger-Eater.git"
+  },
+  "keywords": [
+    "burger",
+    "eater"
+  ],
+  "author": "Jamelea Sinclair",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jameleasin/Burger-Eater/issues"
+  },
+  "homepage": "https://github.com/jameleasin/Burger-Eater#readme"
+}
