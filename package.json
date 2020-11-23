@@ -33,6 +33,13 @@
   },
   "homepage": "https://github.com/jameleasin/Burger-Eater#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "1.x",
+    "express": "4.x",
+    "express-handlebars": "^5.2.0",
+    "handlebars": "4.x",
+    "heroku": "7.x",
+    "mysql": "2.x",
+    "node": "12.x",
+    "npm": "6.x"
   }
 }
