@@ -36,42 +36,44 @@ var orm = {
     selectAll: function(table, cb) {
         var queryString = "SELECT * FROM " + table + ";";
 
-        connection.query(queryString, function(err, result) {
+        connection.query(dbQuery, function(err, res) {
             if (err) {
                 throw err;
             }
-            cb(result);
+            cb(res);
         });
     },
     // Add a burger to the db.
-    insertOne: function(table, cols, vals, cb) {
-        var queryString = "INSERT INTO " + table;
-        queryString += " (";
-        queryString += cols.toString();
-        queryString += ") ";
-        queryString += "VALUES (";
-        queryString += printQuestionMarks(vals.length);
-        queryString += ") ";
+   creat: function (table, cols, vals, cb) {
+       var dbQuery =
+           "INSERT INTO " +
+           table +
+           " (" +
+           cols.toString() +
+           ") " +
+           "VALUES (" +
+           printQuestonMarks(vals.length) +
+           ") ";
 
-        console.log(queryString);
-
-        connection.query(queryString, vals, function(err, result) {
+        connection.query(dbQuery, vals, function(err, res) {
             if (err) {
                 throw err
             }
-            cb(result);
+            cb(res);
         });
     },
     // Set burger devoured status to true.
-    updateOne: function(table, objColVals, condition, cb) {
-        var queryString = "UPDATE " + table;
-        queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
-
-        console.log(queryString);
-
+update: function (table, objColVals, condition, cb) {
+    var dbQuery =
+      "UPDATE " +
+      table +
+      " SET " +
+      objToSql(objColVals) +
+      " "+
+      "WHERE " +
+      condition;
+       
+       
         connection.query(queryString, function(err, result) {
             if (err) {
                 throw err

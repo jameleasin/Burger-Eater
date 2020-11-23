@@ -5,4 +5,4 @@ USE burgers_db;
 
 INSERT INTO burgers (burger_name) VALUES ('Beet and Goat');
 INSERT INTO burgers (burger_name) VALUES ('Mac & Cheese Burger');
-INSERT INTO burgers (burger_name) VALUES ('I cant beleive its not a burger, burger');;
+INSERT INTO burgers (burger_name) VALUES ('I cant beleive its not a burger, burger');
