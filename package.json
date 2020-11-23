@@ -31,5 +31,8 @@
   "bugs": {
     "url": "https://github.com/jameleasin/Burger-Eater/issues"
   },
-  "homepage": "https://github.com/jameleasin/Burger-Eater#readme"
+  "homepage": "https://github.com/jameleasin/Burger-Eater#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
