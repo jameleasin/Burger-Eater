@@ -4,7 +4,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 
 // ENABLE PORT
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 56799;
 
 // CREATE APP
 const app = express();
