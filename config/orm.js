@@ -44,7 +44,7 @@ var orm = {
         });
     },
     // Add a burger to the db.
-   creat: function (table, cols, vals, cb) {
+   create: function (table, cols, vals, cb) {
        var dbQuery =
            "INSERT INTO " +
            table +
