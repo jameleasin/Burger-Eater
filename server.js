@@ -2,7 +2,6 @@
 // DEPENDENCIES
 const express = require("express");
 const exphbs = require("express-handlebars");
-require('dotenv').config()
 
 // ENABLE PORT
 const PORT = process.env.PORT || 8080;
