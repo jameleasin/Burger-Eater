@@ -1,62 +1,62 @@
-//requiring npm
+// DEPENDENCIES
 const express = require("express");
-const router = express.Router();
-//models
-const burger = require("../models/burger.js");
+const logSymbols = require('log-symbols');
+const burger = require("../models/burger");
 
-//setting / to display all data
-router.get("/", function (req, res) {
+// CREATE ROUTER
+const router = express.Router();
+
+// GET 
+router.get("/", function (request, response) {
     burger.selectAll(function (data) {
-        var hbsObject = {
-            burgers: data
+        const hbsObject = {
+            burger: data
         };
-        console.log(hbsObject);
-//sending data to render in handlebars      
-        res.render("index", hbsObject);
+        console.log(`--> ${logSymbols.info} Sending: ${JSON.stringify(hbsObject)}`);
+        response.render("index", hbsObject);
     });
 });
 
-//adding a burger based on form data
-router.post("/api/burgers", function (req, res) {
-    burger.insertOne([
-        "burger_name", "devoured"
-    ], [
-            req.body.name, req.body.devoured
-        ], function (result) {
-            res.json({ id: result.insertId });
-        });
+// POST
+router.post("/api/burgers", function (request, response) {
+    burger.insertOne("burger_name", request.body.burger_name, function (result) {
+        response.json({ id: result.insertId });
+    });
 });
 
-//updating a burger's status based on changes to devoured status
-router.put("/api/burgers/:id", function (req, res) {
-    var condition = "id = " + req.params.id;
+// UPDATE
+router.put("/api/burgers/:new", function (request, response) {
+    const id = request.params.new;
+    const devoured = request.body.devoured;
 
-    console.log("condition", condition);
+    console.log(`--> Devoured(${id}): ${devoured}`);
 
-    burger.updateOne({
-        devoured: req.body.devoured
-    }, condition, function (result) {
+    burger.updateOne("devoured", devoured, id, function (result) {
         if (result.changedRows == 0) {
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
+            return response.status(404).end();
+        }
+        else {
+            response.status(200).end();
         }
     });
 });
 
-//deleting burgers, because we can
-router.delete("/api/burgers/:id", function (req, res) {
-    var condition = "id = " + req.params.id;
-  
-    burger.delete(condition, function (result) {
-      if (result.affectedRows == 0) {
-        return res.status(404).end();
-      } else {
-        res.status(200).end();
-      }
+// DELETE
+router.delete("/api/burgers/:new", function (request, response) {
+    const id = request.params.new;
+
+    console.log(`--> Deleted(${id})`);
+
+    burger.deleteOne("burgers", id, function (result) {
+        
+        if (result.affectedRows == 0) {
+            return response.status(404).end();
+        }
+        else {
+            response.status(200).end();
+        }
     });
-  });
+});
 
-
-
+// EXPORTS
 module.exports = router;
