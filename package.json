@@ -10,7 +10,7 @@
     "handlebars": "^4.7.6",
     "heroku": "^7.47.3",
     "mysql": "^2.18.1",
-    "node": "^12.19.8"
+    "node": "v14.15.0"
   },
   "devDependencies": {},
   "scripts": {
