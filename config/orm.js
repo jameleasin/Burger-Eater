@@ -1,102 +1,42 @@
-// Import (require) connection.js
-var connection = require("../config/connection.js");
+// DEPENDENCIES
+const connection = require("./connection");
 
-// Helper function for SQL syntax.
-function printQuestionMarks(num) {
-    var arr = [];
-    for (var i = 0; i < num; i++) {
-        arr.push("?");
+// CREATE THE ORM
+const orm = {
+
+    // SELECT ALL BURGERS
+    selectAll: function (tableInput, callback) {
+
+        let queryString = `SELECT * FROM ${tableInput}`;
+
+        connection.query(queryString, function (error, result) {
+            if (error) throw error;
+            callback(result);
+        });
+    },
+
+    // ADD A NEW BURGER
+    insertOne: function (table, column, values, callback) {
+
+        let queryString = `INSERT INTO ?? (??) VALUES (?)`;
+        
+        connection.query(queryString, [table,column,values], function (error, result) {
+            if (error) throw error;
+            callback(result);
+        });
+    },
+    
+    // DEVOUR A CURRENT BURGER
+    updateOne: function (table, column, condition, values, callback) {
+
+        let queryString = `UPDATE ?? SET ??=? WHERE id=?`;
+        
+        connection.query(queryString, [table,column,condition,values], function (error, result) {
+            if (error) throw error;
+            callback(result);
+        });
     }
-    return arr.toString();
 }
 
-// Helper function to convert object key/value pairs to SQL syntax
-function objToSql(ob) {
-    var arr = [];
-    // loop through the keys and push the key/value as a string int arr
-    for (var key in ob) {
-        var value = ob[key];
-        // check to skip hidden properties
-        if (Object.hasOwnProperty.call(ob, key)) {
-            // if string with spaces, add quotations (cats => 'cats')
-            if (typeof value === "string" && value.indexOf(" ") >= 0) {
-                value = "'" + value + "'";
-            }
-            // e.g. {name: 'cats'} => ["name='cats'"]
-            // e.g. {sleepy: true} => ["sleepy=true"]
-            arr.push(key + "=" + value);
-        }
-    }
-    // translate array of strings to a single comma-separated string
-    return arr.toString();
-}
-
-var orm = {
-    // Display all burgers in the db.
-    selectAll: function(table, cb) {
-        var queryString = "SELECT * FROM " + table + ";";
-
-        connection.query(dbQuery, function(err, res) {
-            if (err) {
-                throw err;
-            }
-            cb(res);
-        });
-    },
-    // Add a burger to the db.
-   create: function (table, cols, vals, cb) {
-       var dbQuery =
-           "INSERT INTO " +
-           table +
-           " (" +
-           cols.toString() +
-           ") " +
-           "VALUES (" +
-           printQuestonMarks(vals.length) +
-           ") ";
-
-        connection.query(dbQuery, vals, function(err, res) {
-            if (err) {
-                throw err
-            }
-            cb(res);
-        });
-    },
-    // Set burger devoured status to true.
-update: function (table, objColVals, condition, cb) {
-    var dbQuery =
-      "UPDATE " +
-      table +
-      " SET " +
-      objToSql(objColVals) +
-      " "+
-      "WHERE " +
-      condition;
-       
-       
-        connection.query(queryString, function(err, result) {
-            if (err) {
-                throw err
-            }
-            cb(result);
-        });
-    },
-    // Delete a burger from the db.
-    deleteOne: function(table, condition, cb) {
-        var queryString = "DELETE FROM " + table;
-        queryString += " WHERE ";
-        queryString += condition;
-
-        console.log(queryString);
-
-        connection.query(queryString, function(err, result) {
-            if (err) {
-                throw err
-            }
-            cb(result);
-        });
-    }
-};
-
-// Export the ORM object in module.exports.
+// EXPORTS
 module.exports = orm;
