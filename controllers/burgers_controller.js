@@ -1,6 +1,5 @@
 // DEPENDENCIES
 const express = require("express");
-const logSymbols = require('log-symbols');
 const burger = require("../models/burger");
 
 // CREATE ROUTER
